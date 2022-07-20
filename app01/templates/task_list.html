@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">表单</div>
+        <div class="panel-body">
+            <form id="addform" novalidate>
+                <div class="clearfix">
+                    {% for field in form %}
+                        <div class="col-xs-6">
+                            <div class="form-group" style="position: relative;margin-bottom: 20px">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                                <span class="error-msg" style="color:red;position: absolute"></span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </form>
+                <div class="col-xs-12">
+                    <button type="button" id="btnadd" class="btn btn-primary">提 交</button>
+                </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+            任务列表
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>标题</th>
+                    <th>级别</th>
+                    <th>负责人</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in queryset %}
+                    <tr>
+                        <td>{{ obj.id }}</td>
+                        <td>{{ obj.title }}</td>
+                        <td>{{ obj.get_level_display }}</td>
+                        <td>{{ obj.user.username }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="#">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="#">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+<ul class="pagination">
+    {{ page_string }}
+</ul>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(function () {
+            bindBtnAddEvent()
+        })
+
+        function bindBtnAddEvent() {
+            $('#btnadd').click(function () {
+                $('.error-msg').text('')
+                $.ajax({
+                    url: '/task/add/',
+                    type: 'post',
+                    data: $('#addform').serialize(),
+                    dataType: 'JSON',
+                    success: function (res) {
+                        if(res.status){
+                            alert('添加成功')
+                            location.reload()
+                        }else{
+                            $.each(res.error,function (name,errorList){
+                                $('#id_'+errorList).next().text(errorList[0])
+                            })
+                        }
+                    }
+                })
+            })
+        }
+
+    </script>
+{% endblock %}

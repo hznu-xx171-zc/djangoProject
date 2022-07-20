@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}">
+    <style>
+        .account {
+            width: 400px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 5px 5px 20px #aaa;
+        }
+    </style>
+</head>
+<body>
+<div class="account">
+    <h2 style="text-align:center;margin-top:0;">用户登录</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+            <label>{{ form.username.label }}</label>
+            {{ form.username }}
+            <span style="color: red">{{ form.username.errors.0 }}</span>
+        </div>
+        <div class="form-group">
+            <label>{{ form.password.label }}</label>
+            {{ form.password }}
+            <span style="color: red">{{ form.password.errors.0 }}</span>
+        </div>
+        <div class="form-group">
+            <label>{{ form.code.label }}</label>
+            <div class="row">
+                <div class="col-xs-7">
+                {{ form.code }}
+            <span style="color: red">{{ form.code.errors.0 }}</span>
+                    </div>
+                <div class="col-xs-5">
+                <img src="/image/code/">
+                    </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">登 录</button>
+    </form>
+</div>/
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+</body>
+</html>

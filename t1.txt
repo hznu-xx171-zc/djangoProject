@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1/css/bootstrap.css">
+<link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="/static/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+<script src="/static/js/jquery-3.6.0.min.js"></script>
+<script src="/static/plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+<script src="/static/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="/static/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css'%}">
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+
+
+
+
+
